@@ -1,0 +1,36 @@
+name: Build & Deploy to Galaxy
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: meteorengineer/setup-meteor@v2
+        with:
+          meteor-release: '2.14'
+
+      - run: meteor npm install
+
+      - name: Write settings.json
+        run: |
+          printf '%s' '${{ secrets.METEOR_SETTINGS }}' > settings.json
+
+      - name: Show Settings
+        run: cat settings.json
+
+      - name: Deploy to Galaxy
+        uses: aquinoit/galaxy-ghactions@0.0.2
+        with:
+          meteor_session_base64: ${{ secrets.METEOR_SESSION_B64 }}
+          app_hostname: ghactionsdeploy.meteorapp.com
+          region: galaxy.meteor.com
+          settings_file: ./settings.json
+          deploy_flags: '--free'
+          npm_install: 'true'
+          npm_install_args: ''
