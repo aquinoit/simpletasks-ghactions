@@ -6,6 +6,7 @@ Deployed to Galaxy: https://simpletasks.meteorapp.com/
 
 
 
+
 ## What and why this stack?
 The main goal is to make development as quick and efficient as possible. To achieve this, I have selected these technologies:
 
