@@ -28,8 +28,8 @@ jobs:
         uses: aquinoit/galaxy-ghactions@0.0.2
         with:
           meteor_session_base64: ${{ secrets.METEOR_SESSION_B64 }}
-          app_hostname: ghactionsdeploy.meteorapp.com
-          region: galaxy.meteor.com
+          app_hostname: ghactionsdeployau
+          region: ap-southeast-2.galaxy-deploy.meteor.com
           settings_file: ./settings.json
           deploy_flags: '--free'
           npm_install: 'true'
